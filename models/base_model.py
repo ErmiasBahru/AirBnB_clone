@@ -22,7 +22,7 @@ class BaseModel():
 
     def __init__(self, *args, **kwargs):
         # create uuid when instance is initialized and convert to string
-        if len(kwargs) is not 0:
+        if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
                     setattr(self,
