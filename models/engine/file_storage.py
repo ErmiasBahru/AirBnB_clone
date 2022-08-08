@@ -14,12 +14,12 @@ from models.review import Review
 
 
 valid_classes = {'BaseModel': BaseModel,
-                'User': User,
-                'State': State,
-                'City': City,
-                'Amenity': Amenity,
-                'Place': Place,
-                'Review': Review}
+                 'User': User,
+                 'State': State,
+                 'City': City,
+                 'Amenity': Amenity,
+                 'Place': Place,
+                 'Review': Review}
 
 
 class FileStorage():
