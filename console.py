@@ -19,25 +19,25 @@ class HBNBCommand(cmd.Cmd):
     """Class representing the HBNBcommand class"""
     prompt = '(hbnb) '
     valid_classes = {'BaseModel': BaseModel,
-                    'User': User,
-                    'State': State,
-                    'City': City,
-                    'Amenity': Amenity,
-                    'Place': Place,
-                    'Review': Review}
+                     'User': User,
+                     'State': State,
+                     'City': City,
+                     'Amenity': Amenity,
+                     'Place': Place,
+                     'Review': Review}
 
     valid_class_strings = {'BaseModel': 'BaseModel',
-                         'User': 'User',
-                         'State': 'State',
-                         'City': 'City',
-                         'Amenity': 'Amenity',
-                         'Place': 'Place',
-                         'Review': 'Review'}
+                           'User': 'User',
+                           'State': 'State',
+                           'City': 'City',
+                           'Amenity': 'Amenity',
+                           'Place': 'Place',
+                           'Review': 'Review'}
 
     valid_commands = {'all': hf.all,
-                     'count': hf.count,
-                     'show': hf.show,
-                     'destroy': hf.destroy}
+                      'count': hf.count,
+                      'show': hf.show,
+                      'destroy': hf.destroy}
 
     objects_dict = models.storage._FileStorage__objects
 
