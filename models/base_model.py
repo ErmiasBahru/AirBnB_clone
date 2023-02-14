@@ -22,9 +22,9 @@ class BaseModel():
 
     def __init__(self, *args, **kwargs):
         # create uuid when instance is initialized and convert to string
-        if len(kwargs) != 0:
+        if kwargs:
             for key, value in kwargs.items():
-                if key == 'created_at' or key == 'updated_at':
+                if key in ['created_at', 'updated_at']:
                     setattr(self,
                             key,
                             datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
@@ -40,9 +40,7 @@ class BaseModel():
 
     def __str__(self):
         """Method that returns a string representation of an instance"""
-        return ("[{}] ({}) {}".format(self.__class__.__name__,
-                                      self.id,
-                                      self.__dict__))
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         self.updated_at = datetime.now()

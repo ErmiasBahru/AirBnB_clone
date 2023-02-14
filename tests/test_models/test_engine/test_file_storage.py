@@ -69,7 +69,7 @@ class TestFileStorageClassCreation(unittest.TestCase):
 
     def test_new_method(self):
         x = BaseModel()
-        obj_key = "{}.{}".format(x.__class__.__name__, x.id)
+        obj_key = f"{x.__class__.__name__}.{x.id}"
         self.storage.new(x)
         self.assertTrue(obj_key in self.storage._FileStorage__objects)
         self.assertIsInstance(self.storage._FileStorage__objects[obj_key],
@@ -98,7 +98,7 @@ class TestFileStorageClassCreation(unittest.TestCase):
     def test_reload_method(self):
         self.x = BaseModel()
         self.x.custom = "Warriors"
-        x_id_key = "{}.{}".format(self.x.__class__.__name__, self.x.id)
+        x_id_key = f"{self.x.__class__.__name__}.{self.x.id}"
         self.storage.new(self.x)
         self.storage.save()
         self.storage._FileStorage__objects = {}
@@ -122,7 +122,5 @@ class TestFileStorageClassCreation(unittest.TestCase):
                               str)
 
     def test_str_method(self):
-        string = "[{}] ({}) {}".format(self.x.__class__.__name__,
-                                       self.x.id,
-                                       self.x.__dict__)
+        string = f"[{self.x.__class__.__name__}] ({self.x.id}) {self.x.__dict__}"
         self.assertEqual(string, str(self.x))

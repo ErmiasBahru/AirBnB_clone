@@ -99,7 +99,7 @@ class TestUserCreationEmpty(unittest.TestCase):
 
     def test_reload_user(self):
         x_id = self.x.id
-        x_id_key = "{}.{}".format(self.x.__class__.__name__, self.x.id)
+        x_id_key = f"{self.x.__class__.__name__}.{self.x.id}"
         self.storage.save()
         self.storage._FileStorage__objects = {}
         self.storage.reload()
@@ -186,17 +186,15 @@ class TestUserCreation(unittest.TestCase):
         self.assertNotEqual(old_updated_at, self.x.updated_at)
 
     def test_instance_is_in_storage(self):
-        key = "{}.{}".format(self.x.__class__.__name__, self.x.id)
+        key = f"{self.x.__class__.__name__}.{self.x.id}"
         self.assertTrue(key in self.dict_)
 
     def test_instance_storage_attrs(self):
-        key = "{}.{}".format(self.x.__class__.__name__, self.x.id)
+        key = f"{self.x.__class__.__name__}.{self.x.id}"
         self.x.save()
 
     def test_str_method(self):
-        string = "[{}] ({}) {}".format(self.x.__class__.__name__,
-                                       self.x.id,
-                                       self.x.__dict__)
+        string = f"[{self.x.__class__.__name__}] ({self.x.id}) {self.x.__dict__}"
         self.assertEqual(string, str(self.x))
 
     def test_id_creation(self):

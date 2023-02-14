@@ -78,7 +78,7 @@ class TestAmenityEmptyCreation(unittest.TestCase):
 
     def test_reload_amenity(self):
         x_id = self.x.id
-        x_id_key = "{}.{}".format(self.x.__class__.__name__, self.x.id)
+        x_id_key = f"{self.x.__class__.__name__}.{self.x.id}"
         self.storage.save()
         self.storage._FileStorage__objects = {}
         self.storage.reload()

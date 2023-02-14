@@ -71,7 +71,5 @@ class TestBaseModelObjectCreation(unittest.TestCase):
         self.assertFalse(self.my_model is self.my_new_model)
 
     def test_str_method(self):
-        string = "[{}] ({}) {}".format(self.my_model.__class__.__name__,
-                                       self.my_model.id,
-                                       self.my_model.__dict__)
+        string = f"[{self.my_model.__class__.__name__}] ({self.my_model.id}) {self.my_model.__dict__}"
         self.assertEqual(string, str(self.my_model))

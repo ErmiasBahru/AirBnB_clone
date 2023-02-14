@@ -91,9 +91,8 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] in self.valid_classes:
             if len(args) < 2:
                 print("** instance id missing **")
-            elif "{}.{}".format(args[0], args[1]) in HBNBCommand.objects_dict:
-                print(HBNBCommand.objects_dict["{}.{}".format(args[0],
-                                                              args[1])])
+            elif f"{args[0]}.{args[1]}" in HBNBCommand.objects_dict:
+                print(HBNBCommand.objects_dict[f"{args[0]}.{args[1]}"])
             else:
                 print("** no instance found **")
         else:
@@ -113,8 +112,8 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] in self.valid_classes:
             if len(args) != 2:
                 print("** instance id missing **")
-            elif "{}.{}".format(args[0], args[1]) in HBNBCommand.objects_dict:
-                del(HBNBCommand.objects_dict["{}.{}".format(args[0], args[1])])
+            elif f"{args[0]}.{args[1]}" in HBNBCommand.objects_dict:
+                del HBNBCommand.objects_dict[f"{args[0]}.{args[1]}"]
             else:
                 print("** no instance found **")
         else:
@@ -137,18 +136,21 @@ class HBNBCommand(cmd.Cmd):
 
         if not arg:
             for class_name_key in self.valid_classes:
-                for key in HBNBCommand.objects_dict:
-                    if class_name_key in key:
-                        ret_list.append(str(HBNBCommand.objects_dict[key]))
+                ret_list.extend(
+                    str(HBNBCommand.objects_dict[key])
+                    for key in HBNBCommand.objects_dict
+                    if class_name_key in key
+                )
+            print(ret_list)
+        elif args[0] in self.valid_classes:
+            ret_list.extend(
+                str(HBNBCommand.objects_dict[key])
+                for key in HBNBCommand.objects_dict
+                if args[0] in key
+            )
             print(ret_list)
         else:
-            if args[0] in self.valid_classes:
-                for key in HBNBCommand.objects_dict:
-                    if args[0] in key:
-                        ret_list.append(str(HBNBCommand.objects_dict[key]))
-                print(ret_list)
-            else:
-                print("** class doesn't exist **")
+            print("** class doesn't exist **")
 
     def help_all(self):
         """A method that allows users to get documentation on all."""
@@ -168,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
         else:
-            key = "{}.{}".format(args[0], args[1])
+            key = f"{args[0]}.{args[1]}"
             try:
                 instance = HBNBCommand.objects_dict[key]
             except:
@@ -187,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
                         try:
                             setattr(instance, args[2], type_(args[3]))
                         except:
-                            print("You can't cast to type: {}".format(type_))
+                            print(f"You can't cast to type: {type_}")
                     except:
                         setattr(instance, args[2], str(args[3]))
 
