@@ -40,15 +40,13 @@ def all(arg, empty):
     on the class name or not.
     """
 
-    if arg in valid_classes:
-        print("[", end="")
-        for key in storage:
-            if arg in key:
-                print(storage[key], end=', ')
-        print("]")
-
-    else:
+    if arg not in valid_classes:
         return
+    print("[", end="")
+    for key in storage:
+        if arg in key:
+            print(storage[key], end=', ')
+    print("]")
 
 
 def count(arg, empty):
@@ -68,8 +66,8 @@ def show(class_name, arg):
     if class_name in valid_classes:
         if arg == '':
             print("** instance id missing **")
-        elif "{}.{}".format(class_name, arg) in storage:
-            print(storage["{}.{}".format(class_name, arg)])
+        elif f"{class_name}.{arg}" in storage:
+            print(storage[f"{class_name}.{arg}"])
         else:
             print("** no instance found **")
     else:
@@ -83,8 +81,8 @@ def destroy(class_name, arg):
     if class_name in valid_classes:
         if arg == '':
             print("** instance id missing **")
-        elif "{}.{}".format(class_name, arg) in storage:
-            del(storage["{}.{}".format(class_name, arg)])
+        elif f"{class_name}.{arg}" in storage:
+            del storage[f"{class_name}.{arg}"]
         else:
             print("** no instance found **")
     else:
